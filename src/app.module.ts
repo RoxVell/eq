@@ -22,6 +22,12 @@ import { join } from 'path';
       database: process.env.POSTGRES_DATABASE || 'equeue',
       models: [],
       autoLoadModels: true,
+      dialectOptions: {
+        ssl: {
+          require: true,
+          rejectUnauthorized: false,
+        },
+      },
     }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'client'),
