@@ -13,7 +13,6 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 export class RolesController {
   constructor(private rolesService: RolesService) {}
 
-  @UseGuards(JwtAuthGuard)
   @Post('/')
   async createRole(@Body() roleDto: CreateRoleDto) {
     try {
