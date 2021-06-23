@@ -4,6 +4,7 @@ import { ServiceTreeController } from './service-tree.controller';
 import { SequelizeModule } from "@nestjs/sequelize";
 import { ServiceTree } from "./service-tree.model";
 import { ServicesModule } from "../services/services.module";
+import { AuthModule } from "../auth/auth.module";
 
 @Module({
   providers: [ServiceTreeService],
@@ -11,6 +12,7 @@ import { ServicesModule } from "../services/services.module";
   imports: [
     SequelizeModule.forFeature([ServiceTree]),
     ServicesModule,
+    AuthModule
   ],
 })
 export class ServiceTreeModule {}

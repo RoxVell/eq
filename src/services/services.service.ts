@@ -23,14 +23,10 @@ export class ServicesService {
 
   getServices(isGroup: boolean) {
     if (['true', 'false'].includes(String(isGroup))) {
-      return this.servicesRepository.findAll({ where: { isGroup } });
+      return this.servicesRepository.findAll({ where: { isGroup }, order: [['createdAt', 'DESC']] });
     } else {
-      return this.servicesRepository.findAll();
+      return this.servicesRepository.findAll({ order: [['createdAt', 'DESC']] });
     }
-  }
-
-  async getServiceById(id: number) {
-    return this.servicesRepository.findOne({ where: { id } });
   }
 
   deleteService(id: number) {
@@ -38,7 +34,9 @@ export class ServicesService {
   }
 
   async isGroup(id: number) {
-    const targetService = await this.servicesRepository.findOne({ where: { id } });
+    const targetService = await this.servicesRepository.findOne({
+      where: { id },
+    });
     return targetService.isGroup;
   }
 

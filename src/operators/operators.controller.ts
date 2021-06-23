@@ -4,15 +4,17 @@ import {
   Controller,
   Get,
   InternalServerErrorException,
-  Post,
+  Post, UseGuards,
 } from '@nestjs/common';
 import { OperatorsService } from './operators.service';
 import { CreateUserDto } from '../users/dto/create-user.dto';
+import { JwtAuthGuard } from "../auth/jwt-auth.guard";
 
 @Controller('operators')
 export class OperatorsController {
   constructor(private operatorsService: OperatorsService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Get('/')
   async getOperators() {
     try {
@@ -22,6 +24,7 @@ export class OperatorsController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post('/')
   async createOperator(@Body() operatorDto: Omit<CreateUserDto, 'role'>) {
     try {

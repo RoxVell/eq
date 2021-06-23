@@ -5,16 +5,18 @@ import {
   Get,
   Param,
   Post,
-  Put,
+  Put, UseGuards,
 } from '@nestjs/common';
 import { CreateWindowDto } from './dto/create-window.dto';
 import { WindowsService } from './windows.service';
 import { CreateWindowTypeDto } from "./dto/create-window-type.dto";
+import { JwtAuthGuard } from "../auth/jwt-auth.guard";
 
 @Controller('windows')
 export class WindowsController {
   constructor(private windowsService: WindowsService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Post('/window-type')
   async createWindowType(@Body() dto: CreateWindowTypeDto) {
     try {
@@ -24,6 +26,7 @@ export class WindowsController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post('/')
   async createWindow(@Body() dto: CreateWindowDto) {
     try {
@@ -34,6 +37,7 @@ export class WindowsController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Put('/:id')
   async editWindow(@Param() params, @Body() dto: CreateWindowDto) {
     try {
@@ -43,6 +47,7 @@ export class WindowsController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get('/')
   getAll() {
     try {
@@ -52,6 +57,7 @@ export class WindowsController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete('/:id')
   deleteWindow(@Param() params) {
     try {

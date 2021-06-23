@@ -7,7 +7,6 @@ import {
 } from '@nestjs/common';
 import CreateRoleDto from './dto/create-role.dto';
 import { RolesService } from './roles.service';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('roles')
 export class RolesController {

@@ -6,15 +6,17 @@ import {
   Get,
   Param,
   Post,
-  Query,
+  Query, UseGuards,
 } from '@nestjs/common';
 import { ServiceTreeService } from './service-tree.service';
 import { CreateServiceTreeDto } from './dto/create-service-tree.dto';
+import { JwtAuthGuard } from "../auth/jwt-auth.guard";
 
 @Controller('service-tree')
 export class ServiceTreeController {
   constructor(private serviceTreeService: ServiceTreeService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Get('/')
   async getTree() {
     try {
@@ -24,6 +26,7 @@ export class ServiceTreeController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post('/')
   async add(@Body() body: CreateServiceTreeDto) {
     try {
@@ -33,6 +36,7 @@ export class ServiceTreeController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete('/')
   async deletePath(@Query() query) {
     try {
